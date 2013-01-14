@@ -1,89 +1,11 @@
 <!doctype html>
 <html>
+
 <head>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="turn.js"></script>
-
-<style type="text/css">
-body{
-  background:#ccc;
-}
-#book{
-	width:800px;
-	height:500px;
-}
-
-#book .turn-page{
-	background-color:white;
-}
-
-#book .cover{
-	background:#333;
-}
-
-#book .cover h1{
-	color:white;
-	text-align:center;
-	font-size:50px;
-	line-height:500px;
-	margin:0px;
-}
-
-#book .loader{
-	background-image:url(loader.gif);
-	width:24px;
-	height:24px;
-	display:block;
-	position:absolute;
-	top:238px;
-	left:188px;
-}
-
-#book .data{
-	text-align:center;
-	font-size:40px;
-	color:#999;
-	line-height:500px;
-}
-
-#controls{
-	width:800px;
-	text-align:center;
-	margin:20px 0px;
-	font:30px arial;
-}
-
-#controls input, #controls label{
-	font:30px arial;
-}
-
-#book .odd{
-	background-image:-webkit-linear-gradient(left, #FFF 95%, #ddd 100%);
-	background-image:-moz-linear-gradient(left, #FFF 95%, #ddd 100%);
-	background-image:-o-linear-gradient(left, #FFF 95%, #ddd 100%);
-	background-image:-ms-linear-gradient(left, #FFF 95%, #ddd 100%);
-}
-
-#book .even{
-	background-image:-webkit-linear-gradient(right, #FFF 95%, #ddd 100%);
-	background-image:-moz-linear-gradient(right, #FFF 95%, #ddd 100%);
-	background-image:-o-linear-gradient(right, #FFF 95%, #ddd 100%);
-	background-image:-ms-linear-gradient(right, #FFF 95%, #ddd 100%);
-}
-</style>
-</head>
-<body>
-
-<div id="book">
-	<div class="cover"><h1>The Bible</h1></div>
-</div>
-
-<div id="controls">
-	<label for="page-number">Page:</label> <input type="text" size="3" id="page-number"> of <span id="number-pages"></span>
-</div>
-
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/turn.js"></script>
 <script type="text/javascript">
-
 	// Sample using dynamic pages with turn.js
 
 	var numberOfPages = 1000; 
@@ -146,9 +68,17 @@ body{
 				$('#book').turn('next');
 
 	});
-
 </script>
+</head>
 
+<body>
+<div id="book">
+	<div class="cover"><h1>The Test Book</h1></div>
+</div>
 
+<div id="controls">
+	<label for="page-number">Page:</label> <input type="text" size="3" id="page-number"> of <span id="number-pages"></span>
+</div>
 </body>
+
 </html>
