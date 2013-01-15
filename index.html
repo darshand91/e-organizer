@@ -21,6 +21,15 @@
 			book.turn('addPage', element, page);
 			// Let's assum that the data is comming from the server and the request takes 1s.
 			setTimeout(function(){
+			if(page==2)
+			{
+			  element.html('<img src=calender.jpg height=500 width=400>');
+			}
+			else if(page==3)
+			{
+			element.html('<h1 align=center>INDEX</h1>');
+			}
+			else
 					element.html('<div class="data">Data for page '+page+'</div>');
 			}, 1000);
 		}
