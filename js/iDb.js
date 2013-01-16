@@ -70,7 +70,7 @@ function saveDocument(docName, docContent) {
     "text": docContent,
     "timeStamp": Date.now()
   };
-   alert(docName);
+
   var request = store.put(data);
    
   request.onsuccess = function onSuccess_Save(e) {
