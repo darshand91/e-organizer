@@ -127,8 +127,8 @@ function displayDocList() {
 function saveDoc() {
   var docName = document.getElementById('docName').value;
   var docContent = document.getElementsByTagName('section')[0].innerHTML;
-  alert(docName);
   saveDocument(docName, docContent);
+  alert(docName);
   document.getElementById('docName').value = "";
 };
 /**
