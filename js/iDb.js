@@ -127,6 +127,7 @@ function displayDocList() {
 function saveDoc() {
   var docName = document.getElementById('docName').value;
   var docContent = document.getElementsByTagName('section')[0].innerHTML;
+  alert(docName);
   saveDocument(docName, docContent);
   document.getElementById('docName').value = "";
 };
