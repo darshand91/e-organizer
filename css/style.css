@@ -4,6 +4,7 @@ body{
 #book{
 	width:800px;
 	height:500px;
+	margin:auto;
 }
 
 #book .turn-page{
