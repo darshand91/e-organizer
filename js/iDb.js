@@ -63,7 +63,6 @@ function initIndexedDB() {
  *		
  */
 function saveDocument(docName, docContent) {
-  alert(docName);
   var trans = db.transaction(["doc"], "readwrite");
   var store = trans.objectStore("doc");
   var data = {
@@ -72,6 +71,7 @@ function saveDocument(docName, docContent) {
     "timeStamp": Date.now()
   };
   var request = store.put(data);
+    alert(docName);
   request.onsuccess = function onSuccess_Save(e) {
     displayDocList();
   };
