@@ -63,6 +63,7 @@ function initIndexedDB() {
  *		
  */
 function saveDocument(docName, docContent) {
+  alert(docName);
   var trans = db.transaction(["doc"], "readwrite");
   var store = trans.objectStore("doc");
   var data = {
