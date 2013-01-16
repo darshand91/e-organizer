@@ -21,9 +21,9 @@
           element.html('<h1 align=center>INDEX</h1><table border=1 align=center><tr><th>Sr No</th><th>Topic</th><th>PageNo</th></tr><tr><td align=center>1</td><td align=center>Diary</td><td align=center>4</td></tr><tr><td align=center>2</td><td align=center>To-do</td><td align=center>369</td></tr><tr><td align=center>3</td><td align=center>Events</td><td align=center>370</td></tr></table>');
         } else if(page == 4) {
         //code for notes
-       // element.html('<h1>NOTES</h1><section contenteditable=true id=content width:1000px><h2> Go ahead, edit away! </h2><br><br><br></section><ul id=docList></ul><input type=text id=docName placeholder=Please Enter File Name /><input type=submit value=Save onclick=saveDoc(); return false;/>');
+        element.html('<h1>NOTES</h1><section contenteditable=true id=content width:1000px><h2> Go ahead, edit away! </h2><br><br><br></section><ul id=docList></ul><input type=text id=docName placeholder=Please Enter File Name /><input type=submit value=Save onclick=saveDoc(); return false;/>');
         }
-        } 
+ 
         else element.html('<div class="data">Data for page ' + page + '</div>');
       }, 1000);
     }
