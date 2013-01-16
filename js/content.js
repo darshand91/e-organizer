@@ -18,7 +18,7 @@
         if (page == 2) {
           element.html('<img src=calender.jpg height=500 width=400>');
         } else if (page == 3) {
-          element.html('<h1 align=center>INDEX</h1><table border=1 align=center><tr><th>Sr No</th><th>Topic</th><th>PageNo</th></tr><tr><td align=center>1</td><td align=center>Diary</td><td align=center>4</td></tr><tr><td align=center>2</td><td align=center>To-do</td><td align=center>369</td></tr><tr><td align=center>3</td><td align=center>Events</td><td align=center>370</td></tr></table>');
+          element.html('<h1 align=center>INDEX</h1><table border=1 align=center><tr><th>Sr No</th><th>Topic</th><th>PageNo</th></tr><tr><td align=center>1</td><td align=center>Diary</td><td align=center><input type="button" value="4" onclick="pg1(this)" /></td></tr><tr><td align=center>2</td><td align=center>To-do</td><td align=center><input type="button" value="369" onclick="pg2(this)" /></td></tr><tr><td align=center>3</td><td align=center>Events</td><td align=center><input type="button" value="370" onclick="pg3(this)" /></td></tr></table>');
         }
 		else if(page ==4) {
 		element.html('<h1 align=center>Previous Notes</h1><ul id="docList"></ul>');
@@ -32,7 +32,30 @@
       }, 1000);
     }
   }
+function pg1(theform)
+{
+var numberOfPages = 1000;
+$('#number-pages').html(numberOfPages);
 
+       $('#book').turn('page',4);
+}
+  
+  function pg2(theform)
+{
+var numberOfPages = 1000;
+$('#number-pages').html(numberOfPages);
+
+       $('#book').turn('page',369);
+}
+
+function pg3(theform)
+{
+var numberOfPages = 1000;
+$('#number-pages').html(numberOfPages);
+
+       $('#book').turn('page',370);
+}
+  
   $(window).ready(function () {
     $('#book').turn({
       acceleration: true,
