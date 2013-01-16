@@ -16,7 +16,7 @@
  *
  */
 var db;
-const DB_NAME = "documents";
+const DB_NAME = "notes";
 
 /**
  *Checks browser compatibilty with indexedDB and calls |initIndexedDB()|
@@ -48,7 +48,7 @@ function initIndexedDB() {
 
   request.onupgradeneeded = function onUpgradeNeeded(event) {
     db = event.target.result;
-    var objectStore = db.createObjectStore("doc", {
+    var objectStore = db.createObjectStore("note", {
       keyPath: "timeStamp"
     });
   }
@@ -63,8 +63,8 @@ function initIndexedDB() {
  *		
  */
 function saveDocument(docName, docContent) {
-  var trans = db.transaction(["doc"], "readwrite");
-  var store = trans.objectStore("doc");
+  var trans = db.transaction(["note"], "readwrite");
+  var store = trans.objectStore("note");
   var data = {
     "filename": docName,
     "text": docContent,
@@ -86,8 +86,8 @@ function saveDocument(docName, docContent) {
  *	        timeStamp of the document that needs to be deleted 
  */
 function deleteDoc(id) {
-  var trans = db.transaction(["doc"], "readwrite");
-  var store = trans.objectStore("doc");
+  var trans = db.transaction(["note"], "readwrite");
+  var store = trans.objectStore("note");
   var request = store.delete(id);
   request.onsuccess = function onSuccess_Del(e) {
     displayDocList();
@@ -105,8 +105,8 @@ function displayDocList() {
   var listElement = document.getElementById("docList");
   listElement.innerHTML = "";
 
-  var trans = db.transaction(["doc"], "readwrite");
-  var store = trans.objectStore("doc");
+  var trans = db.transaction(["note"], "readwrite");
+  var store = trans.objectStore("note");
 
   var cursorRequest = store.openCursor();
   cursorRequest.onsuccess = function onSuccess_Cursor(e) {
@@ -132,16 +132,8 @@ function saveDoc() {
   alert(docName);
   document.getElementById('docName').value = "";
 };
-/**
-* UI.js: JavaScript relating to UI goes here.
-*
-*/
 
-/**
-*Renders the Document list on the Web page.
-* @param row
-* It is a tuple containing the atrributes Document Name, Time Stamp and Document Contents.
-*/
+
 function renderDocNames(row) {
   var listElement = document.getElementById("docList");
   var li = document.createElement("li");
