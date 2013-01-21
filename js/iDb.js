@@ -43,7 +43,8 @@ function initIndexedDB() {
 
   request.onsuccess = function onSuccess_Init(event) {
     db = request.result;
-    displayDocList();
+    //displayDocList();
+	alert("hi");
   }
 
   request.onupgradeneeded = function onUpgradeNeeded(event) {
