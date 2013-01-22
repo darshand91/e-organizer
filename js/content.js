@@ -21,7 +21,7 @@
           element.html('<h1 align=center>INDEX</h1><table border=1 align=center><tr><th>Sr No</th><th>Topic</th><th>PageNo</th></tr><tr><td align=center>1</td><td align=center>Diary</td><td align=center><input type="button" value="4" onclick="pg1(this)" /></td></tr><tr><td align=center>2</td><td align=center>To-do</td><td align=center><input type="button" value="369" onclick="pg2(this)" /></td></tr><tr><td align=center>3</td><td align=center>Events</td><td align=center><input type="button" value="370" onclick="pg3(this)" /></td></tr></table>');
         }
         else if(page==5){
-       element.html('<p><a class="iframe" href="../mybook/taskboard/index.html"><h1 style="padding-top:200px;">Interactive To Do List</h1></a></p>');
+       element.html('<p><a class="iframe" href="mybook/taskboard/index.html"><h1 style="padding-top:200px;">Interactive To Do List</h1></a></p>');
         }
 		else if(page ==6) {
 		element.html('<h1 align=center>Previous Notes</h1><ul id="docList"></ul>');
