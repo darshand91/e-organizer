@@ -13,8 +13,10 @@
 $(window).ready(function () {
 $(".iframe").colorbox({iframe:true, width:"85%", height:"80%"});
 $("#flipbook").turn({
-    width: 1000,
+
+          width: 1000,
     height: 600,  
+	
 });
 });
 
@@ -50,7 +52,7 @@ table.hovertable td {
 </head>
 <body onload="init();">
 <div id="flipbook">
-    <div class="hard"><h1>E-Organizer</h1></div> 
+    <div class="hard"><img src="tech.jpg" height="600" width="500"></div> 
     <div class="hard"><img style="padding:10px;"src=calender.jpg height=580 width=450></div>
 
     <div><h1 align=center>INDEX</h1><table class="hovertable" border=1 align=center><tr><th>Sr No</th><th>Topic</th><th>PageNo</th></tr><tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';"><td align=center>1</td><td align=center>Diary</td><td align=center><a href="#" onclick="$('#flipbook').turn('page',4);">4</td></tr><tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';"><td align=center>2</td><td align=center>To-do</td><td align=center>369</td></tr><tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';"><td align=center>3</td><td align=center>Events</td><td align=center>370</td></tr></table> </div>
