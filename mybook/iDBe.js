@@ -16,7 +16,7 @@
  *
  */
 var db;
-const DB_NAME = "events";
+const DB_NAME = "notes";
 
 /**
  *Checks browser compatibilty with indexedDB and calls |initIndexedDB()|
@@ -44,11 +44,15 @@ function initIndexedDB() {
   request.onsuccess = function onSuccess_Init(event) {
     db = request.result;
     displayDocList();
+    displayEventList();
   }
 
   request.onupgradeneeded = function onUpgradeNeeded(event) {
     db = event.target.result;
-    var objectStore = db.createObjectStore("event", {
+    var objectStore = db.createObjectStore("note", {
+      keyPath: "timeStamp"
+    });
+    var eventStore = db.createObjectStore("event", {
       keyPath: "timeStamp"
     });
   }
@@ -62,14 +66,12 @@ function initIndexedDB() {
  *	        Content of the Document.
  *		
  */
-function saveEvent(eventName, eventDesc,eventDate,eventTime) {
-  var trans = db.transaction(["event"], "readwrite");
-  var store = trans.objectStore("event");
-  var event_data = {
-    "eventname": eventName,
-    "eventdesc": eventDesc,
-	"eventdate": eventDate,
-	"eventtime": eventTime,
+function saveDocument(docName, docContent) {
+  var trans = db.transaction(["note"], "readwrite");
+  var store = trans.objectStore("note");
+  var data = {
+    "filename": docName,
+    "text": docContent,
     "timeStamp": Date.now()
   };
 
@@ -83,6 +85,24 @@ function saveEvent(eventName, eventDesc,eventDate,eventTime) {
   };
 };
 
+function saveEvent(eventName, eventDesc,eventDate,eventTime) {
+  var trans = db.transaction(["note"], "readwrite");
+  var store = trans.objectStore("note");
+  var data = {
+    "filename": docName,
+    "text": docContent,
+    "timeStamp": Date.now()
+  };
+
+  var request = store.put(data);
+   
+  request.onsuccess = function onSuccess_Save(e) {
+    displayDocList();
+  };
+  request.onerror = function onError_Save(e) {
+    alert("An Error Occured while Saving Document!");
+  };
+};
 /**
  *Deletes the document from the database.
  *	@param	id
