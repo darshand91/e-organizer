@@ -86,21 +86,23 @@ function saveDocument(docName, docContent) {
 };
 
 function saveEvent(eventName, eventDesc,eventDate,eventTime) {
-  var trans = db.transaction(["note"], "readwrite");
-  var store = trans.objectStore("note");
-  var data = {
-    "filename": docName,
-    "text": docContent,
+  var trans1 = db.transaction(["event"], "readwrite");
+  var store1 = trans1.objectStore("event");
+  var data1 = {
+    "eventname": eventName,
+    "eventdesc": eventDesc,
+    "eventdate": eventDate,
+    "eventtime": eventTime,
     "timeStamp": Date.now()
   };
 
-  var request = store.put(data);
+  var request1 = store1.put(data1);
    
-  request.onsuccess = function onSuccess_Save(e) {
-    displayDocList();
+  request1.onsuccess = function onSuccess_Save(e) {
+    displayEventList();
   };
-  request.onerror = function onError_Save(e) {
-    alert("An Error Occured while Saving Document!");
+  request1.onerror = function onError_Save(e) {
+    alert("An Error Occured while Saving Event!");
   };
 };
 /**
@@ -108,15 +110,15 @@ function saveEvent(eventName, eventDesc,eventDate,eventTime) {
  *	@param	id
  *	        timeStamp of the document that needs to be deleted 
  */
-function deleteDoc(id) {
-  var trans = db.transaction(["note"], "readwrite");
-  var store = trans.objectStore("note");
-  var request = store.delete(id);
-  request.onsuccess = function onSuccess_Del(e) {
-    displayDocList();
+function deleteEvent(id) {
+  var trans1 = db.transaction(["event"], "readwrite");
+  var store1 = trans1.objectStore("event");
+  var request1 = store1.delete(id);
+  request1.onsuccess = function onSuccess_Del(e) {
+    displayEventList();
   };
 
-  request.onerror = function onError_Del(e) {
+  request1.onerror = function onError_Del(e) {
     alert("Delete Request Error !");
   };
 };
@@ -124,12 +126,12 @@ function deleteDoc(id) {
 /**
  *Displays the list of document present in the database.
  */
-function displayDocList() {
-  var listElement = document.getElementById("docList");
+function displayEventList() {
+  var listElement = document.getElementById("eventList");
   listElement.innerHTML = "";
 
-  var trans = db.transaction(["note"], "readwrite");
-  var store = trans.objectStore("note");
+  var trans1 = db.transaction(["event"], "readwrite");
+  var store1 = trans.objectStore("event");
 
   var cursorRequest = store.openCursor();
   cursorRequest.onsuccess = function onSuccess_Cursor(e) {
