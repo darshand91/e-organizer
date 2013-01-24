@@ -1,20 +1,4 @@
-/**
- * iDb.js: IndexedDB has been used for storage, retrieval and deletion of Documents from database.
- * 
- * Database Details:
- * 
- * Database :  documents
- * ObjectStore : doc
- * 
- * Each entry is an object with fields timeStamp (number, which serves as key), filename (string, the document name), 
- * text (string, the contents of the document, generally in html).
- * 
- * Structure of Database Used:
- *  	      Key Path : timeStamp
- *		      Field (text) : Document Name
- * 		      Field (text) : Document Contents [Generally in HTML]
- *
- */
+
 var db;
 const DB_NAME = "notes";
 
@@ -30,10 +14,7 @@ function init() {
   }
 };
 
-/**
- *Creates or opens database.
- *Calls |displayDocList()| to display the list of documents in the database.
- */
+
 function initIndexedDB() {
   var request = window.indexedDB.open(DB_NAME);
 
@@ -58,14 +39,7 @@ function initIndexedDB() {
   }
 };
 
-/**
- *Saves the document in the database.
- *	@param	docName
- *	        Name of the Document 
- *	@param	docContent
- *	        Content of the Document.
- *		
- */
+
 function saveDocument(docName, docContent) {
   var trans = db.transaction(["note"], "readwrite");
   var store = trans.objectStore("note");
@@ -85,7 +59,7 @@ function saveDocument(docName, docContent) {
   };
 };
 
-function saveEvent(eventName, eventDesc,eventDate,eventTime) {
+function saveEvente(eventName, eventDesc,eventDate,eventTime) {
   var trans1 = db.transaction(["event"], "readwrite");
   var store1 = trans1.objectStore("event");
   var data1 = {
@@ -105,11 +79,20 @@ function saveEvent(eventName, eventDesc,eventDate,eventTime) {
     alert("An Error Occured while Saving Event!");
   };
 };
-/**
- *Deletes the document from the database.
- *	@param	id
- *	        timeStamp of the document that needs to be deleted 
- */
+
+function deleteDoc(id) {
+  var trans = db.transaction(["note"], "readwrite");
+  var store = trans.objectStore("note");
+  var request = store.delete(id);
+  request.onsuccess = function onSuccess_Del(e) {
+    displayDocList();
+  };
+
+  request.onerror = function onError_Del(e) {
+    alert("Delete Request Error !");
+  };
+};
+
 function deleteEvent(id) {
   var trans1 = db.transaction(["event"], "readwrite");
   var store1 = trans1.objectStore("event");
@@ -123,15 +106,12 @@ function deleteEvent(id) {
   };
 };
 
-/**
- *Displays the list of document present in the database.
- */
-function displayEventList() {
-  var listElement = document.getElementById("eventList");
+function displayDocList() {
+  var listElement = document.getElementById("docList");
   listElement.innerHTML = "";
 
-  var trans1 = db.transaction(["event"], "readwrite");
-  var store1 = trans.objectStore("event");
+  var trans = db.transaction(["note"], "readwrite");
+  var store = trans.objectStore("note");
 
   var cursorRequest = store.openCursor();
   cursorRequest.onsuccess = function onSuccess_Cursor(e) {
@@ -146,18 +126,49 @@ function displayEventList() {
   }
 };
 
-/**
- *Captures the user input values of Document Name and Document Contents from Web page. 
- *Calls |saveDocument()| method.
- */
+function displayEventList() {
+  var listElement = document.getElementById("eventList");
+  listElement.innerHTML = "";
+
+  var trans1 = db.transaction(["event"], "readwrite");
+  var store1 = trans1.objectStore("event");
+
+  var cursorRequest1 = store1.openCursor();
+  cursorRequest1.onsuccess = function onSuccess_Cursor(e) {
+    var result1 = e.target.result;
+    if ( !! result1 == false) return;
+    renderEventNames(result1.value);
+    result1.continue ();
+  };
+
+  cursorRequest1.onerror = function onError_Cursor(e) {
+    alert("Cursor Request Error !");
+  }
+};
+
 function saveDoc() {
   var docName = document.getElementById('docName').value;
   var docContent = document.getElementsByTagName('section')[0].innerHTML;
   saveDocument(docName, docContent);
-  alert(docName);
+  alert("Document "+docName+" saved successfully !");
   document.getElementById('docName').value = "";
 };
 
+function saveEvent() {
+  var eventName = document.getElementById('eventName').value;
+    
+  var eventDesc = document.getElementById('eventDesc').value;
+  var eventDate = document.getElementById('eventDate').value;
+  
+  var eventTime = document.getElementById('eventTime').value;
+
+saveEvente(eventName, eventDesc, eventDate, eventTime);
+  alert("Event "+eventName+" saved successfully !");
+  document.getElementById('eventName').value = "";
+  document.getElementById('eventDesc').value = "";
+  document.getElementById('eventDate').value = "";
+  document.getElementById('eventTime').value = "";
+};
 
 function renderDocNames(row) {
   var listElement = document.getElementById("docList");
@@ -178,3 +189,24 @@ function renderDocNames(row) {
   li.appendChild(aDel);
   listElement.appendChild(li);
 };
+
+function renderEventNames(row) {
+  var listElement = document.getElementById("eventList");
+  var li = document.createElement("li");
+  var a = document.createElement("a");
+  var aDel = document.createElement("a");
+  a.addEventListener("click", function () {
+    alert("Event: "+row.eventname+"\nDesc.: "+row.eventdesc+"\nDate: "+row.eventdate+"\nTime: "+row.eventtime);
+  }, false);
+
+  aDel.addEventListener("click", function () {
+    deleteEvent(row.timeStamp);
+  }, false);
+
+  aDel.textContent = " [Delete]";
+  a.textContent = row.eventname;
+  li.appendChild(a);
+  li.appendChild(aDel);
+  listElement.appendChild(li);
+};
+
