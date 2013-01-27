@@ -6,6 +6,7 @@
 <script src="jquery.colorbox.js"></script>
 <script type="text/javascript" src="turn.js"></script>
 <script type="text/javascript" src="iDbe.js"></script>
+<script type="text/javascript" src="form_validate.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel="stylesheet" href="colorbox.css" />
 
@@ -63,7 +64,7 @@ table.hovertable td {
 	
     <div><h1 align=center>NOTES</h1><h2><section contenteditable="true" id="content" style="padding-left:30px; font-family: Sacramento, cursive;">Go ahead, edit away!</section></h2> <input type="text" id="docName" placeholder="Please Enter File Name" style="width: 200px;" /><input type="submit" value="Save" onclick="saveDoc(); return false;"/></div>
 	 <div><h1 align=center>Previous Events</h1><ul id="eventList"></ul></div>    
-    <div><h1 align=center>EVENTS</h1><h2><input type="text" id="eventName" placeholder="Please enter Event Name" style="width: 200px;" /><br><textarea id="eventDesc" placeholder="Please enter Event Description"></textarea><br></h2> Date : <input type="text" id="eventDate"/><br>Time : <input type="text" id="eventTime"/><br><input type="submit" value="Save" onclick="saveEvent(); return false;"/> </div>
+    <div><h1 align=center>EVENTS</h1><h2><form name="myform" onsubmit="return checkForm(this); "><input type="text" id="eventName" placeholder="Please enter Event Name" style="width: 200px;" /><br><textarea id="eventDesc" placeholder="Please enter Event Description"></textarea><br></h2> Date : <input type="text" id="eventDate" placeholder="dd/mm/yyyy"/><br>Time : <input type="text" id="eventTime" placeholder="hh:mm (am/pm)"/><br><input type="submit" value="Save" /> </form></div>
     <div></div>
 	
     <div class="hard"></div>

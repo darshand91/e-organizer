@@ -1,4 +1,3 @@
-
 var db;
 const DB_NAME = "notes";
 
