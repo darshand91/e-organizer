@@ -222,5 +222,5 @@ function eventStatus() {
     var result1 = e.target.result;
     if ( !! result1 == false) return;
     //renderEventNames(result1.value);
-   	result1.continue ();
+   	result1.continue (); */
 };
