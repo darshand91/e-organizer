@@ -209,3 +209,18 @@ function renderEventNames(row) {
   listElement.appendChild(li);
 };
 
+
+function eventStatus() {
+	alert("ads");
+	//var listElement = document.getElementById("eventList");
+	//var li=document.getElementById("a");
+	/* var trans1 = db.transaction(["event"], "readwrite");
+  var store1 = trans1.objectStore("event");
+
+  var cursorRequest1 = store1.openCursor();
+  cursorRequest1.onsuccess = function onSuccess_Cursor(e) {
+    var result1 = e.target.result;
+    if ( !! result1 == false) return;
+    //renderEventNames(result1.value);
+   	result1.continue ();
+};
