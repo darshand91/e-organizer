@@ -6,6 +6,7 @@ function checkForm(myform) {
 	var shour=currentdate.getHours();
 	var smins=currentdate.getMinutes();
 	var flag=0;
+	var chktime=0;
 	
 	
 	// regular expression to match required date format 
@@ -33,16 +34,24 @@ function checkForm(myform) {
 				return false; 
 			}
 			
-			if(syear<=regs[3])
+			if(syear<regs[3])
+				flag=1;
+			if(syear==regs[3])
 			{
-				if(smonth<=regs[2])
+				if(smonth<regs[2])
+					flag=1;
+				if(smonth==regs[2])
 				{
-					if(sdate<=regs[1])
+					if(sdate<regs[1])
+						flag=1;
+					if(sdate==regs[1])
 					{
 						flag=1;
+						chktime=1;
 					}
 				}
 			}
+			
 			if(flag==0)
 			{
 				alert("Date already passed out...!");
@@ -87,23 +96,22 @@ function checkForm(myform) {
 				return false; 
 			}
 			var flag1=0;
-			if(flag==1)
+			if(chktime==1)
 			{
-			
-			if(shour<=regs[1])
-			{	
-				flag1=1;
-				if(shour==regs[1] && smins<=regs[2])
-				{
+				if(shour<regs[1])
 					flag1=1;
+				if(shour==regs[1])
+				{
+					if(smins<regs[2])
+						flag1=1;
 				}
-			}
-			if(flag1==0)
-			{
-				alert("Time already passed out...!");
-				return false;
-			}
-		} 
+				if(flag1==0)
+				{
+					alert("Time already passed out...!");
+					return false;
+				}
+				
+			}	
 		}
 		else { 
 			alert("Invalid time format: " + myform.eventTime.value); 
