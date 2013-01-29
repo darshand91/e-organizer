@@ -1,6 +1,7 @@
 var db;
 const DB_NAME = "notes";
-
+var tmp;
+var flag=0;
 /**
  *Checks browser compatibilty with indexedDB and calls |initIndexedDB()|
  */
@@ -209,9 +210,42 @@ function renderEventNames(row) {
   listElement.appendChild(li);
 };
 
+function displayEventList_status() {
 
+
+  var trans2 = db.transaction(["event"], "readwrite");
+  var store2 = trans2.objectStore("event");
+
+  var cursorRequest2 = store2.openCursor();
+  cursorRequest2.onsuccess = function onSuccess_Cursor(e) {
+    var result2 = e.target.result;
+    if ( !! result2 == false) 
+	{
+	flag=1;
+	return;
+    }
+	renderEventNames_status(result2.value);
+    result2.continue ();
+  };
+
+  cursorRequest2.onerror = function onError_Cursor(e) {
+    alert("Cursor Request Error !");
+  }
+  
+};
+
+function renderEventNames_status(row) {
+if(tmp!=null)
+tmp = tmp + row.eventname + "\t"+row.eventdate+"\t"+row.eventtime+"\n";
+};
 function eventStatus() {
-	alert("ads");
+	displayEventList();
+	displayEventList_status();
+	if(flag==1) {
+	alert(tmp);
+	tmp="";
+	flag=0;
+	}
 	//var listElement = document.getElementById("eventList");
 	//var li=document.getElementById("a");
 	/* var trans1 = db.transaction(["event"], "readwrite");
