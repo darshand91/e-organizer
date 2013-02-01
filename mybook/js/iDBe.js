@@ -235,26 +235,24 @@ function displayEventList_status() {
 };
 
 function renderEventNames_status(row) {
-if(tmp!=null)
+var cdate = new Date();
+var sd=cdate.getDate();
+var sm=cdate.getMonth()+1;
+var sy=cdate.getFullYear();
+if(sm<9)
+sm="0"+sm;
+var dt=sd+"/"+sm+"/"+sy;
+if(tmp!=null){
+if(row.eventdate==dt)
 tmp = tmp + row.eventname + "\t"+row.eventdate+"\t"+row.eventtime+"\n";
-};
+}};
 function eventStatus() {
 	displayEventList();
 	displayEventList_status();
 	if(flag==1) {
-	alert(tmp);
+	alert("TODAY's EVENTS\n\n"+tmp);
 	tmp="";
 	flag=0;
 	}
-	//var listElement = document.getElementById("eventList");
-	//var li=document.getElementById("a");
-	/* var trans1 = db.transaction(["event"], "readwrite");
-  var store1 = trans1.objectStore("event");
 
-  var cursorRequest1 = store1.openCursor();
-  cursorRequest1.onsuccess = function onSuccess_Cursor(e) {
-    var result1 = e.target.result;
-    if ( !! result1 == false) return;
-    //renderEventNames(result1.value);
-   	result1.continue (); */
 };
